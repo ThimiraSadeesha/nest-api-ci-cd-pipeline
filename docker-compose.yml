@@ -1,20 +1,13 @@
-version: "3.9"
-
 services:
-  nest-api-dev:
-    container_name: nest-api-dev
-    image: ${DOCKER_USERNAME}/nest-dev:latest
+  mas-portal-api-dev:
+    container_name: nest-api-deployee
     restart: always
-    ports:
-      - "3001:3000"
-    environment:
-      NODE_ENV: development
-
-  nest-api-prod:
-    container_name: nest-api-prod
-    image: ${DOCKER_USERNAME}/nest-main:latest
-    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      NODE_ENV: production
+      NODE_ENV: ${NODE_ENV}
+    profiles:
+      - development
