@@ -1,13 +1,14 @@
 services:
-  mas-portal-api-dev:
-    container_name: nest-api-deployee
-    restart: always
+  nest-api-prod:
+    container_name: nest-api-prod
+    image: sadeeee/nest-api-ci-cd-pipeline:latest
+    restart: unless-stopped
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - "3000:3000"
     environment:
-      NODE_ENV: ${NODE_ENV}
+      NODE_ENV: production
     profiles:
-      - development
+      - production
